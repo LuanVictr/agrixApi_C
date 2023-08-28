@@ -12,6 +12,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,6 +48,7 @@ public class CropController {
    * @return retorna uma lista de CropResponseDto de todas as plantacoes.
    */
   @GetMapping
+  @Secured({"ROLE_ADMIN", "ROLE_MANAGER"})
   public ResponseEntity<List<CropResponseDto>> getAllCrops() {
 
     List<Crop> allCrops = this.cropService.getAllCrops();
