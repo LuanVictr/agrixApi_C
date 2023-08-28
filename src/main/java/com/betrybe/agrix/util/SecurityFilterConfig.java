@@ -11,17 +11,32 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * Camada de configuracao do spring security.
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityFilterConfig {
 
   private SecurityFilter securityFilter;
 
+  /**
+   * Construtor da camada de configuracao.
+   *
+   * @param securityFilter recebe um filter por injecao de dependencia
+   */
   @Autowired
   public SecurityFilterConfig(SecurityFilter securityFilter) {
     this.securityFilter = securityFilter;
   }
 
+  /**
+   * Bean que inicializa a cadeia de filtros.
+   *
+   * @param httpSecurity recebe uma instancia de httpSecurity por injecao de dependencia
+   * @return retorna uma cadeida de filtros buildada
+   * @throws Exception exception lancada em caso de falha da desativacao de csrf
+   */
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
     return httpSecurity.csrf(AbstractHttpConfigurer::disable)

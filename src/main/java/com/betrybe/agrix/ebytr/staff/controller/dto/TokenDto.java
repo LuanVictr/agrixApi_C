@@ -1,5 +1,9 @@
 package com.betrybe.agrix.ebytr.staff.controller.dto;
 
-public class TokenDto {
-
+/**
+ * Dto de token utilizado para criar a resposta da rota de Login.
+ *
+ * @param token token recebido por parametro
+ */
+public record TokenDto(String token) {
 }

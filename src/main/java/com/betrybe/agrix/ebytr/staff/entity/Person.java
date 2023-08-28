@@ -33,6 +33,13 @@ public class Person implements UserDetails, GrantedAuthority {
   public Person() {
   }
 
+  /**
+   * Construtor da entidade Person.
+   *
+   * @param username nome de usuario da pessoa
+   * @param password senha da pessoa
+   * @param role role da pessoa
+   */
   public Person(String username, String password, String role) {
     this.username = username;
     this.password = password;

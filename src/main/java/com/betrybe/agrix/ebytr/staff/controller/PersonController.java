@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Cria a camada de controle para as rotas /person
+ * Cria a camada de controle para as rotas /person.
  */
 @RestController
 @RequestMapping("/persons")
@@ -32,6 +32,13 @@ public class PersonController {
 
   private TokenService tokenService;
 
+  /**
+   * Construtor do controle de persons.
+   *
+   * @param personService camada de servico recebida por injecao de dependencia
+   * @param authenticationManager authenticationManager recebido por injecao de dependencia
+   * @param tokenService camada de servico de tokens recebido por injecao de dependencia
+   */
   @Autowired
   public PersonController(PersonService personService,
       AuthenticationManager authenticationManager,
@@ -43,6 +50,12 @@ public class PersonController {
 
   }
 
+  /**
+   * Rota POST /persons utilizada para cadastrar uma nova pessoa usuaria.
+   *
+   * @param personDto Dto da pessoa a ser criada recebida por parametro
+   * @return retorna uma pessoa nova criada
+   */
   @PostMapping
   public ResponseEntity<PersonResponseDto> createPerson(@RequestBody PersonDto personDto) {
 
