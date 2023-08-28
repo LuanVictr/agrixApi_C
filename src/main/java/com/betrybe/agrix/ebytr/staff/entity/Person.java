@@ -2,6 +2,7 @@ package com.betrybe.agrix.ebytr.staff.entity;
 
 
 import com.betrybe.agrix.ebytr.staff.security.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -92,6 +93,7 @@ public class Person implements UserDetails, GrantedAuthority {
         && Objects.equals(role, person.role);
   }
 
+  @JsonIgnore
   @Override
   public String getAuthority() {
     return this.role.getName();

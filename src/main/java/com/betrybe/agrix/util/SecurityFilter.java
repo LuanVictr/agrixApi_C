@@ -52,26 +52,16 @@ public class SecurityFilter extends OncePerRequestFilter {
     String token = recoveryToken(request);
 
     if (token != null) {
-      String subject = this.tokenService.validateToken(token);
+      String username = this.tokenService.validateToken(token);
+
+      Person personFound = this.personService.getPersonByUsername(username);
+
+      UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
+          new UsernamePasswordAuthenticationToken(personFound, null, personFound.getAuthorities());
+
+      SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
     }
     filterChain.doFilter(request, response);
-  }
-
-  /**
-   * autentica o token da requisicao.
-   *
-   * @param token recebe o token como parametro
-   */
-  private void authenticate(String token) {
-    String username = this.tokenService.validateToken(token);
-
-    Person personFound = this.personService.getPersonByUsername(username);
-
-    UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-        new UsernamePasswordAuthenticationToken(personFound, null, personFound.getAuthorities());
-
-    SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-
   }
 
   /**
